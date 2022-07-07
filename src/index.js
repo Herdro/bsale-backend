@@ -1,6 +1,6 @@
 const express = require('express');
 const { config } = require('../config/config');
-const routerApi = require('./domains/router');
+const routerApi = require('./drivers/router');
 
 const { logErrors, errorHandler, boomErrorHandler } = require('./utils/middleware/error.handler');
 
