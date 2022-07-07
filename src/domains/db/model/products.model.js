@@ -25,7 +25,8 @@ const productSchema = {
   discount: {
     type: DataTypes.INTEGER,
   },
-  category: {
+  categoryId: {
+    field: 'category',
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
@@ -39,7 +40,7 @@ const productSchema = {
 
 class product extends Model {
   static associate(models) {
-    this.belongsTo(models.category, { as: 'productCategory' });
+    this.belongsTo(models.category, { as: 'category'});
   }
 
   static config(sequelize) {
