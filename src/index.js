@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { config } = require('../config/config');
 const routerApi = require('./drivers/router');
 
@@ -9,6 +10,7 @@ const app = express();
 const { port } = config;
 
 app.use(express.json());
+app.use(cors());
 
 routerApi(app);
 
