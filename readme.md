@@ -58,7 +58,7 @@ bsale
 
 * URL: `/products/`
 * Method: `GET`
-* Params: (to request additional information)
+* Query: (to request additional information)
   * price
   * discount
   * category
@@ -75,10 +75,12 @@ bsale
     {
         "id": "integer()",
         "name": "varchar()",
-        "url_image": "varchar(URL)",
+        "urlImage": "varchar(URL)",
         "price": "float()",
         "discount": "integer()",
-        "category": "varchar()",
+        "category": {
+          "name": "varchar()",          
+        }
     },
     ...
 }
