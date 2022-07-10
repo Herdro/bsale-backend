@@ -7,7 +7,7 @@ class ProductService {
     async findLike(data) {
         let category = {};
         if (data.category != null) {
-            filter = {
+            category = {
                 name: { [Op.eq]: data.category}
             }
         } else {category = null};
