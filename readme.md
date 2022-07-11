@@ -59,9 +59,14 @@ bsale
 * URL: `/products/`
 * Method: `GET`
 * Query: (to request additional information)
-  * price
-  * discount
-  * category
+  * priceMax: `integer`
+  * PriceMin: `integer`
+  * discount: `enum("ASD", "DESC")`
+  * category: `string`
+  * limit: `integer`
+  * page: `integer`
+  * nameOrder: `enum("ASD", "DESC")`
+  * priceOrder: `enum("ASD", "DESC")`
 * Use: Get all product
 
 ##### Sucess Response

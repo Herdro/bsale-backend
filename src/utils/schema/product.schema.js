@@ -1,13 +1,20 @@
 const Joi = require('joi');
 
 const price = Joi.number().integer();
-const discount = Joi.number().integer();
 const category = Joi.string();
+const order = Joi.string().valid('ASC', 'DESC');
+const limit = Joi.number().integer();
+const page = Joi.number().integer();
 
 const filterSchema = Joi.object({
-    price,
-    discount,
+    priceMax: price,
+    priceMin: price,
+    discount: order,
     category,
+    nameOrder: order,
+    priceOrder: order,
+    limit,
+    page
 });
 
 module.exports = {
