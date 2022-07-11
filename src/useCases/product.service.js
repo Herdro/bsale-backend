@@ -1,6 +1,7 @@
-const boom = require("@hapi/boom");
-const { models } = require("../drivers/MySQL/sequelize");
-const { Op } = require("sequelize");
+const boom = require('@hapi/boom');
+const { Op } = require('sequelize');
+const { models } = require('../drivers/MySQL/sequelize');
+
 class ProductService {
   constructor() {}
 
@@ -15,22 +16,25 @@ class ProductService {
       category = null;
     }
 
-    let options = {
+    const options = {
       include: [
         {
           model: models.category,
-          as: "category",
-          attributes: { exclude: ["id"] },
+          as: 'category',
+          attributes: { exclude: ['id'] },
           where: category,
           right: true,
         },
       ],
-      attributes: { exclude: ["categoryId"] },
-      where: "",
+      attributes: { exclude: ['categoryId'] },
+      where: '',
     };
 
-    let { limit, page, nameOrder, priceOrder, priceMax, priceMin, discount } =
-      data;
+    const {
+      limit, nameOrder, priceOrder, priceMax, priceMin, discount,
+    } = data;
+
+    let { page } = data;
 
     if (limit) {
       if (page < 1 || page == null) {
@@ -41,15 +45,15 @@ class ProductService {
     }
 
     if (nameOrder) {
-      options.order = [["name", nameOrder]];
+      options.order = [['name', nameOrder]];
     }
 
     if (priceOrder) {
-      options.order = [["price", priceOrder]];
+      options.order = [['price', priceOrder]];
     }
 
     if (discount) {
-      options.order = [["discount", discount]];
+      options.order = [['discount', discount]];
     }
 
     if (priceMin && priceMax) {

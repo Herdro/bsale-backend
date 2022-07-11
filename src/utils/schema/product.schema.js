@@ -7,16 +7,16 @@ const limit = Joi.number().integer();
 const page = Joi.number().integer();
 
 const filterSchema = Joi.object({
-    priceMax: price,
-    priceMin: price,
-    discount: order,
-    category,
-    nameOrder: order,
-    priceOrder: order,
-    limit,
-    page
+  priceMax: price,
+  priceMin: price,
+  discount: order,
+  category,
+  nameOrder: order,
+  priceOrder: order,
+  limit,
+  page,
 });
 
 module.exports = {
-    filterSchema
-}
+  filterSchema,
+};

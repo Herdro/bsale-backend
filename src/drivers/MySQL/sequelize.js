@@ -14,8 +14,8 @@ const sequelize = new Sequelize(URI, {
     max: 5,
     min: 0,
     acquire: 5000,
-    idle: 1000
-  }
+    idle: 1000,
+  },
 });
 
 setupModels(sequelize);
