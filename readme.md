@@ -67,6 +67,7 @@ bsale
   * page: `integer`
   * nameOrder: `enum("ASD", "DESC")`
   * priceOrder: `enum("ASD", "DESC")`
+  * search: `string`
 * Use: Get all product
 
 ##### Sucess Response

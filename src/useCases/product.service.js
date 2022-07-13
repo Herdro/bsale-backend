@@ -1,6 +1,6 @@
-const boom = require('@hapi/boom');
-const { Op } = require('sequelize');
-const { models } = require('../drivers/MySQL/sequelize');
+const boom = require("@hapi/boom");
+const { Op } = require("sequelize");
+const { models } = require("../drivers/MySQL/sequelize");
 
 class ProductService {
   constructor() {}
@@ -20,18 +20,24 @@ class ProductService {
       include: [
         {
           model: models.category,
-          as: 'category',
-          attributes: { exclude: ['id'] },
+          as: "category",
+          attributes: { exclude: ["id"] },
           where: category,
           right: true,
         },
       ],
-      attributes: { exclude: ['categoryId'] },
-      where: '',
+      attributes: { exclude: ["categoryId"] },
+      where: "",
     };
 
     const {
-      limit, nameOrder, priceOrder, priceMax, priceMin, discount,
+      limit,
+      nameOrder,
+      priceOrder,
+      priceMax,
+      priceMin,
+      discount,
+      search,
     } = data;
 
     let { page } = data;
@@ -45,15 +51,15 @@ class ProductService {
     }
 
     if (nameOrder) {
-      options.order = [['name', nameOrder]];
+      options.order = [["name", nameOrder]];
     }
 
     if (priceOrder) {
-      options.order = [['price', priceOrder]];
+      options.order = [["price", priceOrder]];
     }
 
     if (discount) {
-      options.order = [['discount', discount]];
+      options.order = [["discount", discount]];
     }
 
     if (priceMin && priceMax) {
@@ -71,6 +77,10 @@ class ProductService {
       if (priceMin) {
         options.where = { price: { [Op.gte]: priceMin } };
       }
+    }
+
+    if (search) {
+      options.where = { name: { [Op.like]: `%${search}%` } };
     }
 
     try {
