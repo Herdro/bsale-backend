@@ -6,6 +6,8 @@ class ProductService {
   constructor() {}
 
   async findLike(data) {
+
+    // Configuración filtrado de producto con tabla relacionada de categoría
     let category = {};
 
     if (data.category != null) {
@@ -16,6 +18,7 @@ class ProductService {
       category = null;
     }
 
+    // Configuiración base para relacionar tabla de productos con categorías
     const options = {
       include: [
         {
@@ -30,6 +33,7 @@ class ProductService {
       where: "",
     };
 
+    // Extracción de query params
     const {
       limit,
       nameOrder,
@@ -40,6 +44,7 @@ class ProductService {
       search,
     } = data;
 
+    // Extracción y configuración de query params de paginación
     let { page } = data;
 
     if (limit) {
@@ -50,18 +55,22 @@ class ProductService {
       options.offset = (page - 1) * options.limit;
     }
 
+    // Configuración de ordenamiento por nombre
     if (nameOrder) {
       options.order = [["name", nameOrder]];
     }
 
+    // Configuración de ordenamiento por precio
     if (priceOrder) {
       options.order = [["price", priceOrder]];
     }
 
+    // Configuración de ordenamiento por cantidad de descuento
     if (discount) {
       options.order = [["discount", discount]];
     }
 
+    // Configuración de filtro por cantidad maxima o minima de precio
     if (priceMin && priceMax) {
       options.where = {
         [Op.and]: [
@@ -79,10 +88,12 @@ class ProductService {
       }
     }
 
+    // Configuración de busqueda por nombre de producto
     if (search) {
       options.where = { name: { [Op.like]: `%${search}%` } };
     }
 
+    // Aplicación de consulta a sequelize
     try {
       const rta = await models.product.findAll(options);
       return rta;

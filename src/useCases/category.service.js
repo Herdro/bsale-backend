@@ -5,6 +5,7 @@ class CategoryService {
   constructor() {}
 
   async findLike() {
+    // APlicación de consulta a sequelize
     try {
       const rta = await models.category.findAll({
         attributes: { exclude: ['id'] },
